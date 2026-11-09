@@ -32,7 +32,7 @@
     }
     
     /* DISABLE SELECTION & IMAGE DRAGGING SITE-WIDE */
-    img {
+    img, video {
       -webkit-user-drag: none;
       user-drag: none;
       -webkit-touch-callout: none;
@@ -177,7 +177,7 @@
       padding: 10px 5px 25px 5px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      align-items: flex-start; /* Keeps cards aligned to top without stretching */
+      align-items: flex-start;
     }
     .horizontal-slider::-webkit-scrollbar { height: 6px; }
     .horizontal-slider::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -192,7 +192,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start; /* Prevents pushing images to the bottom */
+      justify-content: flex-start;
       transition: border-color 0.3s;
     }
     .slider-card:hover {
@@ -547,18 +547,23 @@
           <h4>Kicking Dreams Initiative</h4>
           <p>Founder of youth sports initiative delivering professional football training and athletic pathways to underprivileged children in Bangalore.</p>
         </div>
-        <div class="media-box" onclick="openModal('Kicking Dreams', 'Placeholder for Kicking Dreams coaching sessions and group photos.')">
-          📷 Photo: Kicking Dreams Sessions
-        </div>
+        <img src="Kicking_Dreams_1.jpeg" 
+             alt="Kicking Dreams Initiative" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Kicking_Dreams_1.jpeg', 'Kicking Dreams Initiative')">
       </div>
       <div class="slider-card">
         <div>
           <h4>MUN Training Initiative</h4>
           <p>Mentored high school delegates in public speaking, resolution drafting, policy research, and parliamentary diplomacy.</p>
         </div>
-        <div class="media-box" onclick="openModal('MUN Mentorship', 'Placeholder photo for MUN training workshops.')">
-          📷 Photo: Mentorship Workshops
-        </div>
+        <video controls 
+               controlsList="nodownload" 
+               oncontextmenu="return false;" 
+               style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); background: #000;">
+          <source src="MUN_Training_Initiative.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </section>
@@ -748,7 +753,7 @@
 
     // Block right-click menu on all images site-wide
     document.addEventListener('contextmenu', event => {
-      if (event.target.tagName === 'IMG') {
+      if (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') {
         event.preventDefault();
       }
     });
