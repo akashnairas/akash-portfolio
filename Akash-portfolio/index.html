@@ -172,12 +172,12 @@
     /* HORIZONTAL CAROUSEL LAYOUT FOR SUBSECTIONS */
     .horizontal-slider {
       display: flex;
-      gap: 24px;
+      gap: 20px;
       overflow-x: auto;
       padding: 10px 5px 25px 5px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
-      align-items: flex-start;
+      align-items: stretch;
     }
     .horizontal-slider::-webkit-scrollbar { height: 6px; }
     .horizontal-slider::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -192,7 +192,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
+      justify-content: space-between;
       transition: border-color 0.3s;
     }
     .slider-card:hover {
@@ -229,8 +229,18 @@
     .dual-image-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 8px;
+      gap: 12px;
       margin-top: 10px;
+    }
+
+    /* SPORTS SECTION FIT WRAPPER */
+    .sports-slider-card {
+      flex: 1 1 300px;
+      min-width: 280px;
+    }
+    .sports-combined-card {
+      flex: 2 1 480px;
+      min-width: 440px;
     }
 
     /* MEDIA CONTAINER PLACEHOLDERS */
@@ -358,11 +368,24 @@
     footer a { color: var(--accent-gold); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
 
+    @media (max-width: 992px) {
+      .sports-slider-card, .sports-combined-card {
+        flex: 0 0 320px;
+        min-width: 320px;
+      }
+      .sports-combined-card {
+        flex: 0 0 460px;
+        min-width: 460px;
+      }
+    }
+
     @media (max-width: 768px) {
       .header-content { flex-direction: column; text-align: center; }
       .header-text { text-align: center; }
       h1 { font-size: 2.2rem; }
       .slider-card { flex: 0 0 280px; }
+      .sports-combined-card { flex: 0 0 340px; min-width: 340px; }
+      .sports-combined-card .dual-image-grid { grid-template-columns: 1fr; }
       #floatingTopBtn { bottom: 20px; right: 20px; width: 44px; height: 44px; font-size: 1.1rem; }
     }
   </style>
@@ -591,21 +614,21 @@
       <h2 class="section-title">Sports</h2>
       <a href="#top" class="back-to-top-link">↑ Top</a>
     </div>
-    <div class="horizontal-slider">
+    <div class="horizontal-slider" style="overflow-x: auto;">
       <!-- CARD 1: EXEMPLARY AWARD -->
-      <div class="slider-card">
+      <div class="slider-card sports-slider-card">
         <div>
           <h4>Exemplary Award in Sports</h4>
           <p>Honored with the official Exemplary Performance Award celebrating outstanding athletic achievements and sports leadership from Vishwavidyapeeth (2024–2025).</p>
         </div>
         <img src="exemplary_in_sports.jpeg" 
              alt="Exemplary Award in Sports" 
-             style="width: 100%; height: 180px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             style="width: 100%; height: 150px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
              onclick="openProtectedImage('exemplary_in_sports.jpeg', 'Exemplary Award in Sports')">
       </div>
 
       <!-- CARD 2: FOOTBALL -->
-      <div class="slider-card">
+      <div class="slider-card sports-slider-card">
         <div>
           <h4>Football (Goalkeeper & Captain)</h4>
           <p>Team Captain, trained with BYFL and Alchemy FA, attended Spain International Residency Training, and competed in Subroto Cup circuits.</p>
@@ -613,18 +636,18 @@
         <div class="dual-image-grid">
           <img src="Football_Spain_trip_2.jpeg" 
                alt="Spain International Residency Training" 
-               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
                onclick="openProtectedImage('Football_Spain_trip_2.jpeg', 'Spain International Residency Training')">
           <img src="spain_football_training.jpeg" 
                alt="Spain Football Training Session" 
-               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
                onclick="openProtectedImage('spain_football_training.jpeg', 'Spain Football Training Session')">
         </div>
       </div>
 
       <!-- CARD 3: COMBINED VOLLEYBALL & BADMINTON -->
-      <div class="slider-card" style="flex: 0 0 540px;">
-        <div class="dual-image-grid" style="gap: 16px;">
+      <div class="slider-card sports-combined-card">
+        <div class="dual-image-grid" style="gap: 14px;">
           <!-- Volleyball Column -->
           <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
             <div>
@@ -633,18 +656,18 @@
             </div>
             <img src="Vollyball.jpg" 
                  alt="Volleyball State & CBSE Clusters" 
-                 style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 10px;" 
+                 style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 8px;" 
                  onclick="openProtectedImage('Vollyball.jpg', 'Volleyball Tournament')">
           </div>
           <!-- Badminton Column -->
           <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
             <div>
               <h4>Badminton</h4>
-              <p>Professional athletic badminton training under Coach Praveen Somu.</p>
+              <p>Professional athletic badminton training under Coach Mr. Praveen Somu.</p>
             </div>
             <img src="Badminton_2.jpeg" 
                  alt="Badminton Athletic Training" 
-                 style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 10px;" 
+                 style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 8px;" 
                  onclick="openProtectedImage('Badminton_2.jpeg', 'Badminton Training')">
           </div>
         </div>
