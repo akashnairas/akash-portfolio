@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Akash Nair | Portfolio</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --card-bg: rgba(20, 20, 20, 0.85);
+      --accent-gold: #d4af37;
+      --gold-light: #f3e5ab;
+      --gold-gradient: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+      --text-main: #f0f0f0;
+      --text-muted: #a0a0a0;
+      --border-gold: rgba(212, 175, 55, 0.25);
+      --border-glow: rgba(212, 175, 55, 0.5);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      line-height: 1.6;
+      padding-bottom: 60px;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
+      background-attachment: fixed;
+      transition: filter 0.3s ease;
+    }
+    
+    /* DISABLE SELECTION & IMAGE DRAGGING SITE-WIDE */
+    img, video {
+      -webkit-user-drag: none;
+      user-drag: none;
+      -webkit-touch-callout: none;
+      user-select: none;
+    }
+
+    /* HEADER FLEXBOX WITH PROFILE PHOTO */
+    header {
+      text-align: center;
+      padding: 60px 20px 40px;
+      border-bottom: 1px solid var(--border-gold);
+      position: relative;
+    }
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+    .header-profile-pic {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid var(--accent-gold);
+      box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+      cursor: pointer;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+    .header-profile-pic:hover {
+      transform: scale(1.05);
+      border-color: var(--gold-light);
+    }
+    .header-text {
+      text-align: left;
+    }
+    h1 {
+      font-size: 3rem;
+      background: var(--gold-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin: 0;
+    }
+    p.tagline {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      letter-spacing: 1px;
+    }
+
+    /* 7 HERO CUBES GRID */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+      scroll-margin-top: 20px;
+    }
+    .hero-cube {
+      background: var(--card-bg);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      text-decoration: none;
+      color: var(--text-main);
+      backdrop-filter: blur(10px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 130px;
+    }
+    .hero-cube:hover {
+      transform: translateY(-6px);
+      border-color: var(--border-glow);
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.25);
+    }
+    .hero-cube h3 {
+      color: var(--accent-gold);
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+    .hero-cube p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* SECTIONS & HEADER BACK TO TOP */
+    section {
+      max-width: 1200px;
+      margin: 70px auto 0;
+      padding: 0 20px;
+      scroll-margin-top: 40px;
+    }
+    .section-title-wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+      border-left: 4px solid var(--accent-gold);
+      padding-left: 14px;
+    }
+    .section-title {
+      font-size: 1.8rem;
+      color: var(--accent-gold);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin: 0;
+    }
+    .back-to-top-link {
+      color: var(--gold-light);
+      text-decoration: none;
+      font-size: 0.85rem;
+      background: rgba(212, 175, 55, 0.12);
+      border: 1px solid var(--border-gold);
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .back-to-top-link:hover {
+      background: var(--accent-gold);
+      color: #000;
+      border-color: var(--accent-gold);
+    }
+
+    /* HORIZONTAL CAROUSEL LAYOUT FOR SUBSECTIONS */
+    .horizontal-slider {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      padding: 10px 5px 25px 5px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      align-items: flex-start;
+    }
+    .horizontal-slider::-webkit-scrollbar { height: 6px; }
+    .horizontal-slider::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+    .horizontal-slider::-webkit-scrollbar-thumb { background: var(--accent-gold); border-radius: 10px; }
+    
+    .slider-card {
+      flex: 0 0 340px;
+      scroll-snap-align: start;
+      background: var(--card-bg);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      transition: border-color 0.3s;
+    }
+    .slider-card:hover {
+      border-color: var(--border-glow);
+    }
+    .slider-card h4 {
+      color: var(--gold-light);
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+    }
+    .slider-card p {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    /* SUB-SUBSECTION STYLING */
+    .sub-subsection {
+      margin-top: 15px;
+      padding: 12px;
+      background: rgba(212, 175, 55, 0.08);
+      border-left: 3px solid var(--accent-gold);
+      border-radius: 6px;
+    }
+    .sub-subsection-title {
+      font-size: 0.85rem;
+      color: var(--accent-gold);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* MULTI-IMAGE DUAL GRID STYLING */
+    .dual-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    /* MEDIA CONTAINER PLACEHOLDERS */
+    .media-box {
+      width: 100%;
+      height: 190px;
+      background: #121212;
+      border: 1px dashed var(--border-gold);
+      border-radius: 10px;
+      margin-top: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-gold);
+      font-size: 0.85rem;
+      text-align: center;
+      padding: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .media-box:hover {
+      background: rgba(212, 175, 55, 0.1);
+      border-style: solid;
+    }
+
+    /* RESEARCH PAPER SECTION - STRICTLY NO MEDIA PLACEHOLDERS */
+    .research-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-gold);
+      border-radius: 14px;
+      padding: 35px;
+      backdrop-filter: blur(10px);
+    }
+    .research-card h4 {
+      color: var(--accent-gold);
+      font-size: 1.5rem;
+      margin-bottom: 14px;
+    }
+    .research-metrics {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .metric-item {
+      background: rgba(255, 255, 255, 0.03);
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+    .metric-item strong { color: var(--gold-light); display: block; margin-bottom: 4px; }
+
+    /* FLOATING BACK TO TOP BUTTON */
+    #floatingTopBtn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      z-index: 99;
+      background: var(--card-bg);
+      color: var(--accent-gold);
+      border: 1px solid var(--border-gold);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+    }
+    #floatingTopBtn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+    #floatingTopBtn:hover {
+      background: var(--accent-gold);
+      color: #000;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+    }
+
+    /* LIGHTBOX MODAL */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.9);
+      align-items: center;
+      justify-content: center;
+    }
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid var(--accent-gold);
+      padding: 30px;
+      border-radius: 12px;
+      max-width: 650px;
+      width: 90%;
+      text-align: center;
+      color: var(--text-main);
+    }
+    .close-modal {
+      color: var(--accent-gold);
+      float: right;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      margin-top: 90px;
+      padding: 40px 20px;
+      border-top: 1px solid var(--border-gold);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    footer a { color: var(--accent-gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 768px) {
+      .header-content { flex-direction: column; text-align: center; }
+      .header-text { text-align: center; }
+      h1 { font-size: 2.2rem; }
+      .slider-card { flex: 0 0 280px; }
+      #floatingTopBtn { bottom: 20px; right: 20px; width: 44px; height: 44px; font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <header>
+    <div class="header-content">
+      <img src="Akash_photo.jpg" 
+           alt="Akash Nair Profile Photo" 
+           class="header-profile-pic"
+           onclick="openProtectedImage('Akash_photo.jpg', 'Akash Nair')">
+      <div class="header-text">
+        <h1>Akash Nair</h1>
+        <p class="tagline">Leadership &bull; Model UN &bull; Sports &bull; Quantitative Economics</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- 7 HERO CUBES GRID NAVIGATION -->
+  <div class="hero-grid" id="menu">
+    <a href="#leadership" class="hero-cube">
+      <h3>Student Leadership</h3>
+      <p>Head Boy & Sports Captain</p>
+    </a>
+    <a href="#mun" class="hero-cube">
+      <h3>Model UN</h3>
+      <p>HMUN India Award & Executive Board</p>
+    </a>
+    <a href="#academics" class="hero-cube">
+      <h3>Academics</h3>
+      <p>94.8% ICSE 10th & 100/100 PE</p>
+    </a>
+    <a href="#community" class="hero-cube">
+      <h3>Community Service</h3>
+      <p>Kicking Dreams & MUN Mentorship</p>
+    </a>
+    <a href="#sports" class="hero-cube">
+      <h3>Sports</h3>
+      <p>Goalkeeping, Volleyball, Badminton</p>
+    </a>
+    <a href="#research" class="hero-cube">
+      <h3>Research Paper</h3>
+      <p>Football Transfer Market Inflation</p>
+    </a>
+    <a href="#hobbies" class="hero-cube">
+      <h3>Hobbies</h3>
+      <p>Motorcycling, Guitar, Friends</p>
+    </a>
+  </div>
+
+  <!-- STUDENT LEADERSHIP -->
+  <section id="leadership">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Student Leadership</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>Head Boy (Nagarjuna Vidyaniketan '25-'26)</h4>
+          <p>Spearheaded executive student council operations, campus governance, inter-school summits, and academic-athletic policy representation.</p>
+        </div>
+        <img src="NVN_HeadBoy.jpeg" 
+             alt="Head Boy - Nagarjuna Vidyaniketan" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('NVN_HeadBoy.jpeg', 'Head Boy - Nagarjuna Vidyaniketan')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Head Boy (Vishwavidyapeeth '24-'25)</h4>
+          <p>Led student council initiatives, directed school assembly protocol, organized intra-school academic events, and managed student affairs.</p>
+        </div>
+        <img src="VVP_Head_Boy.jpeg" 
+             alt="Head Boy - Vishwavidyapeeth" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('VVP_Head_Boy.jpeg', 'Head Boy - Vishwavidyapeeth')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Sports Captain (VVP '23-'24)</h4>
+          <p>Managed inter-house sports competitions, team selections, and intra-school athletic scheduling.</p>
+        </div>
+        <img src="VVP_Sports_head.jpeg" 
+             alt="Sports Captain - Vishwavidyapeeth" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('VVP_Sports_head.jpeg', 'Sports Captain - Vishwavidyapeeth')">
+      </div>
+    </div>
+  </section>
+
+  <!-- MODEL UN -->
+  <section id="mun">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Model United Nations</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>Harvard MUN India (DISEC)</h4>
+          <p>Awarded <strong>Diplomatic Commendation</strong> representing DISEC committee against 160 international delegates across 6 countries and 21 states.</p>
+        </div>
+        <img src="Harvard_MUN.jpg" 
+             alt="Harvard MUN India (DISEC) Award" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Harvard_MUN.jpg', 'Harvard MUN India (DISEC) - Diplomatic Commendation')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Bangalore Circuit Executive Board</h4>
+          <p>Served as Executive Board member judging and directing committee debates across multiple circuit conferences.</p>
+        </div>
+        <img src="VVP_MUN_04.jpeg" 
+             alt="Bangalore Circuit Executive Board" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('VVP_MUN_04.jpeg', 'Bangalore Circuit Executive Board')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Yuva Sansad Secretariat</h4>
+          <p>Organizing committee secretariat member for state-level youth parliament simulation.</p>
+        </div>
+        <img src="Youth_Parliament_2.jpeg" 
+             alt="Yuva Sansad Secretariat" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Youth_Parliament_2.jpeg', 'Yuva Sansad Secretariat')">
+      </div>
+    </div>
+  </section>
+
+  <!-- ACADEMICS -->
+  <section id="academics">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Academics</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>ICSE 10th Board Score</h4>
+          <p>Achieved <strong>94.8% overall</strong> aggregate score across core academic subjects.</p>
+        </div>
+        <img src="10th_Marksheet.jpg" 
+             alt="ICSE 10th Board Marksheet" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('10th_Marksheet.jpg', 'ICSE 10th Board Marksheet')">
+      </div>
+
+      <!-- DEDICATED ICSE PE SUB-SUBSECTION -->
+      <div class="slider-card">
+        <div>
+          <h4>ICSE Physical Education</h4>
+          <p>Achieved a perfect score in Physical Education with national recognition.</p>
+          <div class="sub-subsection">
+            <span class="sub-subsection-title">Sub-Section Detail: PE Excellence</span>
+            <p style="margin-top: 4px; font-size: 0.85rem; color: #fff;">
+              Score: <strong>100/100 Perfect Mark</strong> &bull; Awarded Official Certificate of Merit.
+            </p>
+          </div>
+        </div>
+        <img src="Physical_education_Centum.jpeg" 
+             alt="ICSE Physical Education 100/100 Certificate" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Physical_education_Centum.jpeg', 'ICSE Physical Education 100/100 Certificate of Merit')">
+      </div>
+
+      <div class="slider-card">
+        <div>
+          <h4>IELTS Academic Score</h4>
+          <p>Achieved an <strong>Overall Band Score of 7.0</strong> on the IELTS Academic Examination.</p>
+        </div>
+        <img src="ILTES.jpg" 
+             alt="IELTS Academic Test Report Form" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('ILTES.jpg', 'IELTS Academic Test Report Form')">
+      </div>
+    </div>
+  </section>
+
+  <!-- COMMUNITY SERVICE -->
+  <section id="community">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Community Service</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>Kicking Dreams Initiative</h4>
+          <p>Founder of youth sports initiative delivering professional football training and athletic pathways to underprivileged children in Bangalore.</p>
+        </div>
+        <img src="Kicking_Dreams_1.jpeg" 
+             alt="Kicking Dreams Initiative" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Kicking_Dreams_1.jpeg', 'Kicking Dreams Initiative')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>UForCare Platform</h4>
+          <p>Developed an AI-assisted web platform designed to facilitate continuity of care, health tracking, and seamless hospital connectivity for elderly individuals.</p>
+        </div>
+        <div class="media-box" onclick="openModal('UForCare Platform', 'AI-assisted web application designed for elder care continuity, vital tracking, and emergency medical integration.')">
+          💻 App Preview: UForCare Platform
+        </div>
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>MUN Training Initiative</h4>
+          <p>Mentored high school delegates in public speaking, resolution drafting, policy research, and parliamentary diplomacy.</p>
+        </div>
+        <video controls 
+               controlsList="nodownload" 
+               oncontextmenu="return false;" 
+               style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); background: #000;">
+          <source src="MUN_Training_Initiative.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPORTS -->
+  <section id="sports">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Sports</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>Football (Goalkeeper & Captain)</h4>
+          <p>Team Captain, trained with BYFL and Alchemy FA, attended Spain International Residency Training, and competed in Subroto Cup circuits.</p>
+        </div>
+        <div class="dual-image-grid">
+          <img src="Football_Spain_trip_2.jpeg" 
+               alt="Spain International Residency Training" 
+               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               onclick="openProtectedImage('Football_Spain_trip_2.jpeg', 'Spain International Residency Training')">
+          <img src="spain_football_training.jpeg" 
+               alt="Spain Football Training Session" 
+               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               onclick="openProtectedImage('spain_football_training.jpeg', 'Spain Football Training Session')">
+        </div>
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Volleyball</h4>
+          <p>Competed in <strong>CBSE Clusters Top 8</strong> and represented state-level competitive tournaments.</p>
+        </div>
+        <img src="Vollyball.jpg" 
+             alt="Volleyball State & CBSE Clusters" 
+             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Vollyball.jpg', 'Volleyball Tournament')">
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Badminton</h4>
+          <p>Professional athletic badminton training under Coach Mr.Praveen Somu.</p>
+        </div>
+        <img src="Badminton_2.jpeg" 
+             alt="Badminton Athletic Training" 
+             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Badminton_2.jpeg', 'Badminton Training')">
+      </div>
+    </div>
+  </section>
+
+  <!-- ECONOMICS RESEARCH PAPER -->
+  <section id="research">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Economics Research Paper</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="research-card">
+      <h4>Inflation in Football Transfer Markets</h4>
+      <p><strong>Quantitative Empirical Study:</strong> A data-driven paper evaluating player valuation surges post-2015 in European top-flight leagues, wage structure escalation, and regulatory liquidity controls.</p>
+      
+      <div class="research-metrics">
+        <div class="metric-item">
+          <strong>Methodology</strong>
+          Regression modeling on European top-5 transfer market windows (2015-2025).
+        </div>
+        <div class="metric-item">
+          <strong>Core Finding</strong>
+          Transfer fee inflation outpaces domestic CPI by over 3.8x, driven by broadcast revenue pooling.
+        </div>
+        <div class="metric-item">
+          <strong>Policy Analysis</strong>
+          Evaluates UEFA Financial Fair Play (FFP) squad-cost rules and financial equilibrium mechanisms.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOBBIES & LIFESTYLE -->
+  <section id="hobbies">
+    <div class="section-title-wrap">
+      <h2 class="section-title">Hobbies & Lifestyle</h2>
+      <a href="#top" class="back-to-top-link">↑ Top</a>
+    </div>
+    <div class="horizontal-slider">
+      <div class="slider-card">
+        <div>
+          <h4>Motorcycling</h4>
+          <p>Exploring scrambler and twin-cylinder motorcycle ergonomics, mechanics, and open-road riding.</p>
+        </div>
+        <div class="media-box" onclick="openModal('Motorcycling Photo', 'Placeholder photo for motorcycle rides.')">
+          📷 Photo Slide: Motorcycle Shots
+        </div>
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Guitar & Music</h4>
+          <p>Acoustic and electric guitar practice alongside hip-hop music production dynamics.</p>
+        </div>
+        <div class="media-box" onclick="openModal('Guitar Session', 'Placeholder photo/video for guitar playing.')">
+          📷 Photo Slide: Guitar & Music Session
+        </div>
+      </div>
+      <div class="slider-card">
+        <div>
+          <h4>Friends & Social Life</h4>
+          <p>Downtime spent with friends, travel excursions, and personal creative projects.</p>
+        </div>
+        <div class="media-box" onclick="openModal('Social Life', 'Placeholder photos of friends and travel memories.')">
+          📷 Photo Slide: Memories & Friends
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING BACK TO TOP BUTTON -->
+  <a href="#top" id="floatingTopBtn" title="Back to Top">↑</a>
+
+  <!-- MODAL POPUP PREVIEW -->
+  <div id="mediaModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle" style="color: var(--accent-gold); margin-bottom: 12px;"></h3>
+      <p id="modalBody" style="color: var(--text-muted); font-size: 0.95rem;"></p>
+    </div>
+  </div>
+
+  <footer>
+    <p>Akash Nair &bull; <a href="mailto:akashnair0930@gmail.com">akashnair0930@gmail.com</a> &bull; Instagram: <a href="https://instagram.com/akashonly_._" target="_blank">@akashonly_._</a></p>
+  </footer>
+
+  <script>
+    function openModal(title, text) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalBody').innerText = text;
+      document.getElementById('mediaModal').style.display = 'flex';
+    }
+
+    function openProtectedImage(imageSrc, title) {
+      const win = window.open("", "_blank");
+      win.document.write(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+          <title>${title}</title>
+          <style>
+            body {
+              margin: 0;
+              background-color: #0a0a0a;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              min-height: 100vh;
+              user-select: none;
+              -webkit-user-select: none;
+            }
+            img {
+              max-width: 90vw;
+              max-height: 90vh;
+              object-fit: contain;
+              border-radius: 8px;
+              border: 1px solid #d4af37;
+              box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+              -webkit-user-drag: none;
+              user-drag: none;
+            }
+          </style>
+        </head>
+        <body oncontextmenu="return false;">
+          <img src="${imageSrc}" alt="${title}" oncontextmenu="return false;" ondragstart="return false;">
+        </body>
+        </html>
+      `);
+      win.document.close();
+    }
+
+    function closeModal() {
+      document.getElementById('mediaModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      var modal = document.getElementById('mediaModal');
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Toggle floating back-to-top button on scroll
+    const floatingBtn = document.getElementById('floatingTopBtn');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 350) {
+        floatingBtn.classList.add('show');
+      } else {
+        floatingBtn.classList.remove('show');
+      }
+    });
+
+    // Block right-click menu on all images site-wide
+    document.addEventListener('contextmenu', event => {
+      if (event.target.tagName === 'IMG' || event.target.tagName === 'VIDEO') {
+        event.preventDefault();
+      }
+    });
+
+    // Blur page when switching tabs or window loses focus
+    window.addEventListener('blur', () => {
+      document.body.style.filter = 'blur(10px)';
+    });
+
+    window.addEventListener('focus', () => {
+      document.body.style.filter = 'none';
+    });
+  </script>
+</body>
+</html>
