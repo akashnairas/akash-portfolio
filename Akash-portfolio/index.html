@@ -592,6 +592,7 @@
       <a href="#top" class="back-to-top-link">↑ Top</a>
     </div>
     <div class="horizontal-slider">
+      <!-- CARD 1: EXEMPLARY AWARD -->
       <div class="slider-card">
         <div>
           <h4>Exemplary Award in Sports</h4>
@@ -602,6 +603,8 @@
              style="width: 100%; height: 180px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
              onclick="openProtectedImage('exemplary_in_sports.jpeg', 'Exemplary Award in Sports')">
       </div>
+
+      <!-- CARD 2: FOOTBALL -->
       <div class="slider-card">
         <div>
           <h4>Football (Goalkeeper & Captain)</h4>
@@ -618,25 +621,33 @@
                onclick="openProtectedImage('spain_football_training.jpeg', 'Spain Football Training Session')">
         </div>
       </div>
-      <div class="slider-card">
-        <div>
-          <h4>Volleyball</h4>
-          <p>Competed in <strong>CBSE Clusters Top 8</strong> and represented state-level competitive tournaments.</p>
+
+      <!-- CARD 3: COMBINED VOLLEYBALL & BADMINTON -->
+      <div class="slider-card" style="flex: 0 0 540px;">
+        <div class="dual-image-grid" style="gap: 16px;">
+          <!-- Volleyball Column -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <h4>Volleyball</h4>
+              <p>Competed in <strong>CBSE Clusters Top 8</strong> and represented state-level competitive tournaments.</p>
+            </div>
+            <img src="Vollyball.jpg" 
+                 alt="Volleyball State & CBSE Clusters" 
+                 style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 10px;" 
+                 onclick="openProtectedImage('Vollyball.jpg', 'Volleyball Tournament')">
+          </div>
+          <!-- Badminton Column -->
+          <div style="display: flex; flex-direction: column; justify-content: space-between; height: 100%;">
+            <div>
+              <h4>Badminton</h4>
+              <p>Professional athletic badminton training under Coach Praveen Somu.</p>
+            </div>
+            <img src="Badminton_2.jpeg" 
+                 alt="Badminton Athletic Training" 
+                 style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer; margin-top: 10px;" 
+                 onclick="openProtectedImage('Badminton_2.jpeg', 'Badminton Training')">
+          </div>
         </div>
-        <img src="Vollyball.jpg" 
-             alt="Volleyball State & CBSE Clusters" 
-             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
-             onclick="openProtectedImage('Vollyball.jpg', 'Volleyball Tournament')">
-      </div>
-      <div class="slider-card">
-        <div>
-          <h4>Badminton</h4>
-          <p>Professional athletic badminton training under Coach Praveen Somu.</p>
-        </div>
-        <img src="Badminton_2.jpeg" 
-             alt="Badminton Athletic Training" 
-             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
-             onclick="openProtectedImage('Badminton_2.jpeg', 'Badminton Training')">
       </div>
     </div>
   </section>
