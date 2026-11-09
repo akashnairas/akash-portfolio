@@ -708,6 +708,17 @@
       if (event.target.tagName === 'IMG') {
         event.preventDefault();
       }
+
+    });
+
+    // Blur page when switching tabs or window loses focus
+    window.addEventListener('blur', () => {
+      document.body.style.filter = 'blur(10px)';
+    });
+
+    window.addEventListener('focus', () => {
+      document.body.style.filter = 'none';
+      
     });
   </script>
 </body>
