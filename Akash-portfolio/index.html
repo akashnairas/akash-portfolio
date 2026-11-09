@@ -225,6 +225,14 @@
       letter-spacing: 0.5px;
     }
 
+    /* MULTI-IMAGE DUAL GRID STYLING */
+    .dual-image-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
     /* MEDIA CONTAINER PLACEHOLDERS */
     .media-box {
       width: 100%;
@@ -580,8 +588,15 @@
           <h4>Football (Goalkeeper & Captain)</h4>
           <p>Team Captain, trained with BYFL and Alchemy FA, attended Spain International Residency Training, and competed in Subroto Cup circuits.</p>
         </div>
-        <div class="media-box" onclick="openModal('Goalkeeping Reel', 'Placeholder for Goalkeeping match saves and Spain residency photos.')">
-          🎥 Media: Goalkeeping & Spain Highlights
+        <div class="dual-image-grid">
+          <img src="Football_Spain_trip_2.jpeg" 
+               alt="Spain International Residency Training" 
+               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               onclick="openProtectedImage('Football_Spain_trip_2.jpeg', 'Spain International Residency Training')">
+          <img src="spain_football_training.jpeg" 
+               alt="Spain Football Training Session" 
+               style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border-gold); cursor: pointer;" 
+               onclick="openProtectedImage('spain_football_training.jpeg', 'Spain Football Training Session')">
         </div>
       </div>
       <div class="slider-card">
@@ -589,18 +604,20 @@
           <h4>Volleyball</h4>
           <p>Competed in <strong>CBSE Clusters Top 8</strong> and represented state-level competitive tournaments.</p>
         </div>
-        <div class="media-box" onclick="openModal('Volleyball Tournament', 'Placeholder photo for CBSE Clusters Volleyball team.')">
-          📷 Photo: Volleyball Team Match
-        </div>
+        <img src="Vollyball.jpg" 
+             alt="Volleyball State & CBSE Clusters" 
+             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Vollyball.jpg', 'Volleyball Tournament')">
       </div>
       <div class="slider-card">
         <div>
           <h4>Badminton</h4>
           <p>Professional athletic badminton training under Coach Praveen Somu.</p>
         </div>
-        <div class="media-box" onclick="openModal('Badminton Training', 'Placeholder for Badminton court session photos.')">
-          📷 Photo: Badminton Court Training
-        </div>
+        <img src="Badminton_2.jpeg" 
+             alt="Badminton Athletic Training" 
+             style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Badminton_2.jpeg', 'Badminton Training')">
       </div>
     </div>
   </section>
