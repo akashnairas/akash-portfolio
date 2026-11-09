@@ -177,6 +177,7 @@
       padding: 10px 5px 25px 5px;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      align-items: flex-start; /* Keeps cards aligned to top without stretching */
     }
     .horizontal-slider::-webkit-scrollbar { height: 6px; }
     .horizontal-slider::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
@@ -191,7 +192,7 @@
       padding: 24px;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: flex-start; /* Prevents pushing images to the bottom */
       transition: border-color 0.3s;
     }
     .slider-card:hover {
@@ -499,7 +500,7 @@
         </div>
         <img src="10th_Marksheet.jpg" 
              alt="ICSE 10th Board Marksheet" 
-             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
              onclick="openProtectedImage('10th_Marksheet.jpg', 'ICSE 10th Board Marksheet')">
       </div>
 
@@ -517,7 +518,7 @@
         </div>
         <img src="Physical_education_Centum.jpeg" 
              alt="ICSE Physical Education 100/100 Certificate" 
-             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
              onclick="openProtectedImage('Physical_education_Centum.jpeg', 'ICSE Physical Education 100/100 Certificate of Merit')">
       </div>
 
@@ -528,7 +529,7 @@
         </div>
         <img src="ILTES.jpg" 
              alt="IELTS Academic Test Report Form" 
-             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             style="width: 100%; height: 190px; object-fit: contain; background: #121212; border-radius: 10px; margin-top: 10px; border: 1px solid var(--border-gold); cursor: pointer;" 
              onclick="openProtectedImage('ILTES.jpg', 'IELTS Academic Test Report Form')">
       </div>
     </div>
