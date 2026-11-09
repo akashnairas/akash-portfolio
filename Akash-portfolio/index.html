@@ -28,6 +28,7 @@
         radial-gradient(circle at 15% 15%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 85% 85%, rgba(212, 175, 55, 0.03) 0%, transparent 40%);
       background-attachment: fixed;
+      transition: filter 0.3s ease;
     }
     
     /* DISABLE SELECTION & IMAGE DRAGGING SITE-WIDE */
@@ -430,18 +431,20 @@
           <h4>Bangalore Circuit Executive Board</h4>
           <p>Served as Executive Board member judging and directing committee debates across multiple circuit conferences.</p>
         </div>
-        <div class="media-box" onclick="openModal('Executive Board Gallery', 'Placeholder slide for Executive Board photos.')">
-          📷 Photo Slide: Executive Board Photos
-        </div>
+        <img src="VVP_MUN_04.jpeg" 
+             alt="Bangalore Circuit Executive Board" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('VVP_MUN_04.jpeg', 'Bangalore Circuit Executive Board')">
       </div>
       <div class="slider-card">
         <div>
           <h4>Yuva Sansad Secretariat</h4>
           <p>Organizing committee secretariat member for state-level youth parliament simulation.</p>
         </div>
-        <div class="media-box" onclick="openModal('Yuva Sansad Highlights', 'Placeholder video container for Yuva Sansad video reel.')">
-          🎥 Video Slide: Yuva Sansad Highlight Video
-        </div>
+        <img src="Youth_Parliament_2.jpeg" 
+             alt="Yuva Sansad Secretariat" 
+             style="width: 100%; height: 190px; object-fit: cover; border-radius: 10px; margin-top: 14px; border: 1px solid var(--border-gold); cursor: pointer;" 
+             onclick="openProtectedImage('Youth_Parliament_2.jpeg', 'Yuva Sansad Secretariat')">
       </div>
     </div>
   </section>
@@ -708,7 +711,6 @@
       if (event.target.tagName === 'IMG') {
         event.preventDefault();
       }
-
     });
 
     // Blur page when switching tabs or window loses focus
@@ -718,7 +720,6 @@
 
     window.addEventListener('focus', () => {
       document.body.style.filter = 'none';
-      
     });
   </script>
 </body>
