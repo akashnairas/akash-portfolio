@@ -243,7 +243,7 @@
       min-width: 440px;
     }
 
-    /* MEDIA CONTAINER PLACEHOLDERS */
+    /* MEDIA & EXTERNAL LINK CONTAINER */
     .media-box {
       width: 100%;
       height: 190px;
@@ -252,18 +252,32 @@
       border-radius: 10px;
       margin-top: 10px;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
+      gap: 8px;
       color: var(--accent-gold);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      font-weight: 600;
       text-align: center;
+      text-decoration: none;
       padding: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
     }
     .media-box:hover {
-      background: rgba(212, 175, 55, 0.1);
+      background: rgba(212, 175, 55, 0.14);
       border-style: solid;
+      border-color: var(--accent-gold);
+      transform: translateY(-2px);
+    }
+    .media-box span.url-pill {
+      font-size: 0.78rem;
+      color: #000;
+      background: var(--gold-gradient);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-weight: 700;
     }
 
     /* RESEARCH PAPER SECTION - STRICTLY NO MEDIA PLACEHOLDERS */
@@ -325,35 +339,6 @@
       color: #000;
       transform: translateY(-4px);
       box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-    }
-
-    /* LIGHTBOX MODAL */
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1000;
-      left: 0; top: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.9);
-      align-items: center;
-      justify-content: center;
-    }
-    .modal-content {
-      background: var(--card-bg);
-      border: 1px solid var(--accent-gold);
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 650px;
-      width: 90%;
-      text-align: center;
-      color: var(--text-main);
-    }
-    .close-modal {
-      color: var(--accent-gold);
-      float: right;
-      font-size: 24px;
-      font-weight: bold;
-      cursor: pointer;
     }
 
     /* FOOTER */
@@ -587,16 +572,17 @@
         <div>
           <h4>UforCARE Platform</h4>
           <p style="color: var(--accent-gold); font-size: 0.85rem; font-weight: 600; margin-bottom: 4px;">
-            Elderly Care Discovery Platform &bull; <span style="color: #f39c12;">Launching Soon</span>
+            Senior Care Discovery Marketplace &bull; <span style="color: #f39c12;">Launching Soon</span>
           </p>
           <p style="font-style: italic; color: var(--gold-light); font-size: 0.85rem; margin-bottom: 8px;">
-            "Care choices, considered with you."
+            "Care choices, considered with you..."
           </p>
-          <p>An AI-assisted platform helping families connect with verified home-care and nursing providers across North Bengaluru.</p>
+          <p>An AI-assisted platform connecting families with verified elderly care homes, hospitals, and rehab centers across North Bengaluru.</p>
         </div>
-        <div class="media-box" onclick="openModal('UforCARE Platform', 'Non-emergency elder-care platform helping families discover verified home-care and nursing options across North Bengaluru.')">
-          💻 App Preview: UforCARE (Launching Soon)
-        </div>
+        <a href="https://uforcare.com" target="_blank" rel="noopener noreferrer" class="media-box">
+          <span>Visit UforCARE Landing Page &rarr;</span>
+          <span class="url-pill">uforcare.com</span>
+        </a>
       </div>
       <div class="slider-card">
         <div>
@@ -751,26 +737,11 @@
   <!-- FLOATING BACK TO TOP BUTTON -->
   <a href="#top" id="floatingTopBtn" title="Back to Top">↑</a>
 
-  <!-- MODAL POPUP PREVIEW -->
-  <div id="mediaModal" class="modal">
-    <div class="modal-content">
-      <span class="close-modal" onclick="closeModal()">&times;</span>
-      <h3 id="modalTitle" style="color: var(--accent-gold); margin-bottom: 12px;"></h3>
-      <p id="modalBody" style="color: var(--text-muted); font-size: 0.95rem;"></p>
-    </div>
-  </div>
-
   <footer>
     <p>Akash Nair &bull; <a href="mailto:akashnair0930@gmail.com">akashnair0930@gmail.com</a> &bull; Instagram: <a href="https://instagram.com/akashonly_._" target="_blank">@akashonly_._</a></p>
   </footer>
 
   <script>
-    function openModal(title, text) {
-      document.getElementById('modalTitle').innerText = title;
-      document.getElementById('modalBody').innerText = text;
-      document.getElementById('mediaModal').style.display = 'flex';
-    }
-
     function openProtectedImage(imageSrc, title) {
       const win = window.open("", "_blank");
       win.document.write(`
@@ -807,17 +778,6 @@
         </html>
       `);
       win.document.close();
-    }
-
-    function closeModal() {
-      document.getElementById('mediaModal').style.display = 'none';
-    }
-
-    window.onclick = function(event) {
-      var modal = document.getElementById('mediaModal');
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
     }
 
     // Toggle floating back-to-top button on scroll
